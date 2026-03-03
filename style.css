@@ -93,6 +93,16 @@ body {
     }
 }
 
+/* Стиль для сообщений игрока */
+.message.player-message {
+    color: #aaddff;
+    font-style: italic;
+    border-left: 2px solid #aaddff;
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /* Контейнер для кнопок */
 .choices-container {
     padding: 15px;
