@@ -382,9 +382,9 @@ const scenes = {
             { 
                 text: "В начало", 
                 nextScene: "after_light",
-                style: "mysterious"
+                style: "mysterious",
                 effect: () => {
-                    clearAllMessages ();
+                    clearAllMessages();
                 }
             }
         ]
