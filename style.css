@@ -1,0 +1,213 @@
+/* Базовые стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #000;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Фоновое изображение */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+/* Контейнер для сообщений */
+.text-container {
+    flex: 1;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.messages-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: linear-gradient(0deg, 
+        rgba(0,0,0,0.95) 0%, 
+        rgba(0,0,0,0.7) 30%, 
+        rgba(0,0,0,0.3) 70%,
+        transparent 100%);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+/* Стилизация скроллбара */
+.messages-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+}
+
+/* Сообщение */
+.message {
+    font-size: 18px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    color: white;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 5px 0;
+    animation: messageAppear 0.3s ease;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Контейнер для кнопок */
+.choices-container {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.85);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Базовый стиль для всех кнопок */
+.choice-btn {
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.choice-btn:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.02);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.choice-btn:active {
+    transform: scale(0.98);
+}
+
+/* Классы-модификаторы для кнопок */
+.choice-btn.important {
+    background: linear-gradient(135deg, #ff8c00, #ff2e00);
+    border: none;
+    font-weight: bold;
+}
+
+.choice-btn.mysterious {
+    background: rgba(106, 17, 203, 0.6);
+    border: 1px solid #8a4fff;
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.3);
+}
+
+.choice-btn.quiet {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #666;
+    color: #ccc;
+    font-style: italic;
+}
+
+.choice-btn.danger {
+    background: linear-gradient(135deg, #aa0000, #660000);
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Стили для первой сцены (кнопка СВЕТ) */
+.centered-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    z-index: 10;
+}
+
+.light-button {
+    padding: 25px 40px;
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #fff7b0, #ffe570);
+    color: #333;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    box-shadow: 0 0 50px rgba(255, 255, 200, 0.8);
+    animation: pulse 2s infinite;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.light-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 80px rgba(255, 255, 255, 1);
+}
+
+.light-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 30px rgba(255, 255, 200, 0.6); }
+    50% { box-shadow: 0 0 70px rgba(255, 255, 255, 1); }
+    100% { box-shadow: 0 0 30px rgba(255, 255, 200, 0.6); }
+}
+
+.first-scene .text-container,
+.first-scene .choices-container {
+    display: none;
+}
+
+/* Подсказка для нажатия */
+.tap-hint {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    padding: 10px;
+    animation: pulse 2s infinite;
+    letter-spacing: 1px;
+}
