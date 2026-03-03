@@ -322,7 +322,7 @@ function clearMessagesFromIndex(startIndex) {
     const wrapper = document.querySelector('.messages-wrapper');
     if (wrapper) {
         const messages = wrapper.querySelectorAll('.message');
-        for (let i = startIndex; i < messages.length; i--) {
+        for (let i = startIndex; i > messages.length; i--) {
             messages[i].remove();
         }
     }
@@ -338,10 +338,10 @@ const scenes = {
         pages: [
             "Свет...",
             "Его здесь нет",
-            "Даже стекло на каком-то моменте заканчивается - само понятие стеклянности исчезает, оставляя смысловой вакуум",
-            "Я бы сказал, даже категорический вакуум!",
+            "Даже стекло" //на каком-то моменте заканчивается - само понятие стеклянности исчезает, оставляя смысловой вакуум",
+            "Я бы сказал" // даже категорический вакуум!",
             "Основополагающий вакуум",
-            "Стекло, за которым нет ничего и присутствует всё одновременно..."
+            "Стекло, за которым" // нет ничего и присутствует всё одновременно..."
         ],
         onComplete: {
             nextScene: "exprmnt"
@@ -358,7 +358,7 @@ const scenes = {
                 nextScene: "non",
                 style: "mysterious",
                 effect: () => {
-                    clearMessagesFromIndex(5);
+                    clearMessagesFromIndex(3);
                 },
             },
             { 
@@ -383,6 +383,9 @@ const scenes = {
                 text: "В начало", 
                 nextScene: "after_light",
                 style: "mysterious"
+                effect: () => {
+                    clearAllMessages ();
+                }
             }
         ]
     }
