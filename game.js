@@ -81,26 +81,31 @@ function addMessage(text, sender = "game") {
 // ПРОПУСК АНИМАЦИИ (ПОКАЗАТЬ ВЕСЬ ТЕКСТ СРАЗУ)
 // ========================
 function skipAnimation(messageElement, fullText, callback = null) {
-    if (currentAnimation) {
+    // Сохраняем флаг, что анимация была, ДО ее остановки
+    const hadAnimation = currentAnimation !== null;
+    
+    if (hadAnimation) {
         stopCurrentAnimation();  // Останавливаем текущую анимацию
+    }
+    
+    if (messageElement && fullText) {
+        // Показываем весь текст сразу
+        messageElement.textContent = fullText;
         
-        if (messageElement) {
-            // Показываем весь текст сразу
-            messageElement.textContent = fullText;
-            
-            // Прокручиваем вниз
-            const wrapper = document.querySelector('.messages-wrapper');
-            if (wrapper) {
-                wrapper.scrollTop = wrapper.scrollHeight;
-            }
+        // Прокручиваем вниз
+        const wrapper = document.querySelector('.messages-wrapper');
+        if (wrapper) {
+            wrapper.scrollTop = wrapper.scrollHeight;
+        }
 
-            // Удаляем data-атрибуты
-            delete messageElement.dataset.fullText;
-            delete messageElement.dataset.callback;
-            delete messageElement._callback;
-            
-            // Вызываем callback, если есть
-            if (callback) callback();
+        // Удаляем data-атрибуты
+        delete messageElement.dataset.fullText;
+        delete messageElement.dataset.callback;
+        delete messageElement._callback;
+        
+        // Вызываем callback, если есть
+        if (callback) {
+            setTimeout(callback, 10); // Небольшая задержка для гарантии
         }
     }
 }
