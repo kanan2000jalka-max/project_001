@@ -322,7 +322,7 @@ function clearMessagesFromIndex(startIndex) {
     const wrapper = document.querySelector('.messages-wrapper');
     if (wrapper) {
         const messages = wrapper.querySelectorAll('.message');
-        for (let i = startIndex; i > messages.length; i--) {
+        for (let i = startIndex; i < messages.length; i++) {
             messages[i].remove();
         }
     }
