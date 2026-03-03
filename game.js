@@ -93,6 +93,11 @@ function skipAnimation(messageElement, fullText, callback = null) {
             if (wrapper) {
                 wrapper.scrollTop = wrapper.scrollHeight;
             }
+
+            // Удаляем data-атрибуты
+            delete messageElement.dataset.fullText;
+            delete messageElement.dataset.callback;
+            delete messageElement._callback;
             
             // Вызываем callback, если есть
             if (callback) callback();
@@ -214,7 +219,7 @@ function loadScene(sceneId) {
     } else {
         // Обычная сцена - одно сообщение + выбор
         const messageDiv = addMessage(scene.text);
-        typeMessage(scene.text, messageDiv, 25, () => {
+        typeMessage(scene.text, messageDiv, 10, () => {
             if (scene.choices) {
                 showChoices(scene.choices);
             }
@@ -235,7 +240,7 @@ function showNextMessage(sceneId, messageIndex) {
         // Показываем следующее сообщение
         const messageDiv = addMessage(scene.pages[messageIndex]);
         
-        typeMessage(scene.pages[messageIndex], messageDiv, 25, () => {
+        typeMessage(scene.pages[messageIndex], messageDiv, 10, () => {
             gameState.currentMessageIndex = messageIndex;
             
             // Если это последнее сообщение - показываем выбор
@@ -299,7 +304,7 @@ function createFullscreenClickListenerForNext(nextSceneId) {
                 const fullText = currentMessage.dataset.fullText;
                 const callback = currentMessage._callback;
                 
-                skipAnimation(currentMessage, fullText, () => {
+                skipAnimation(currentMessage, fullText, callback);
                     // После пропуска показываем, что можно нажать для продолжения
                     if (callback) callback();
                 });
