@@ -358,7 +358,7 @@ const scenes = {
                 nextScene: "non",
                 style: "mysterious",
                 effect: () => {
-                    clearMessagesFromIndex(3);
+                    clearMessagesFromIndex(5);
                 },
             },
             { 
