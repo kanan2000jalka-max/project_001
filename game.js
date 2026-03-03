@@ -309,10 +309,22 @@ function showFirstScene() {
 // КОМАНДЫ ДЛЯ ОЧИСТКИ ЭКРАНА
 // ========================
 
+// 1. УДАЛЯЕТ ВСЕ СООБЩЕНИЯ
 function clearAllMessages() {
     const wrapper = document.querySelector('.messages-wrapper');
     if (wrapper) {
         wrapper.innerHTML = '';  // Удаляет ВСЕ сообщения
+    }
+}
+
+// 2. УДАЛЯЕТ ОТ ОПРЕДЕЛЕННОГО СООБЩЕНИЯ И ДО КОНЦА
+function clearMessagesFromIndex(startIndex) {
+    const wrapper = document.querySelector('.messages-wrapper');
+    if (wrapper) {
+        const messages = wrapper.querySelectorAll('.message');
+        for (let i = startIndex; i < messages.length; i++) {
+            messages[i].remove();
+        }
     }
 }
 
@@ -344,7 +356,10 @@ const scenes = {
             { 
                 text: "Что за эксперимент?", 
                 nextScene: "non",
-                style: "mysterious"
+                style: "mysterious",
+                effect: () => {
+                    clearMessagesFromIndex(3);
+                },
             },
             { 
                 text: "Давай", 
@@ -363,9 +378,6 @@ const scenes = {
         type: "choice",
         background: "url('images/11.png')",
         text: "Эта страница пока что еще не готова. Прошу вас вернуться в самое начало)",
-        effect: () => {
-            clearAllMessages();
-        },
         choices: [
             { 
                 text: "В начало", 
