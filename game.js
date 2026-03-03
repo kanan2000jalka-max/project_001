@@ -307,7 +307,7 @@ function createFullscreenClickListenerForNext(nextSceneId) {
                 skipAnimation(currentMessage, fullText, callback);
                     // После пропуска показываем, что можно нажать для продолжения
                     if (callback) callback();
-                });
+                };
                 return;
             }
         }
