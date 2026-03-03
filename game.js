@@ -334,6 +334,9 @@ const scenes = {
                 text: "Что за эксперимент?", 
                 nextScene: "non",
                 style: "mysterious"
+                effect: () => {
+                    clearAllMessages();
+                }
             },
             { 
                 text: "Давай", 
