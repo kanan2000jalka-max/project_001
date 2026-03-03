@@ -78,6 +78,29 @@ function addMessage(text, sender = "game") {
 }
 
 // ========================
+// ПРОПУСК АНИМАЦИИ (ПОКАЗАТЬ ВЕСЬ ТЕКСТ СРАЗУ)
+// ========================
+function skipAnimation(messageElement, fullText, callback = null) {
+    if (currentAnimation) {
+        stopCurrentAnimation();  // Останавливаем текущую анимацию
+        
+        if (messageElement) {
+            // Показываем весь текст сразу
+            messageElement.textContent = fullText;
+            
+            // Прокручиваем вниз
+            const wrapper = document.querySelector('.messages-wrapper');
+            if (wrapper) {
+                wrapper.scrollTop = wrapper.scrollHeight;
+            }
+            
+            // Вызываем callback, если есть
+            if (callback) callback();
+        }
+    }
+}
+
+// ========================
 // ПОБУКВЕННАЯ ПЕЧАТЬ СООБЩЕНИЯ
 // ========================
 function typeMessage(text, messageElement, speed = 10, callback = null) {
@@ -85,6 +108,13 @@ function typeMessage(text, messageElement, speed = 10, callback = null) {
     
     let index = 0;
     messageElement.textContent = '';
+
+    // Сохраняем полный текст и callback в элементе для пропуска
+    messageElement.dataset.fullText = text;
+    messageElement.dataset.callback = callback ? 'true' : 'false';
+    if (callback) {
+        messageElement._callback = callback;  // Храним callback отдельно
+    }
     
     function addChar() {
         if (index < text.length) {
@@ -100,6 +130,9 @@ function typeMessage(text, messageElement, speed = 10, callback = null) {
             currentAnimation = setTimeout(addChar, speed);
         } else {
             currentAnimation = null;
+            delete messageElement.dataset.fullText;
+            delete messageElement.dataset.callback;
+            delete messageElement._callback;
             if (callback) callback();
         }
     }
@@ -229,6 +262,20 @@ function createFullscreenClickListener(sceneId, nextMessageIndex) {
     
     fullscreenClickListener = () => {
         if (gameState.waitingForChoice) return; // Не реагируем, если есть кнопки
+
+        // Проверяем, идет ли сейчас анимация
+        if (currentAnimation) {
+            // ПРОПУСКАЕМ АНИМАЦИЮ
+            const currentMessage = document.querySelector('.message:last-child');
+            if (currentMessage && currentMessage.dataset.fullText) {
+                const fullText = currentMessage.dataset.fullText;
+                const callback = currentMessage._callback;
+                
+                skipAnimation(currentMessage, fullText, callback);
+                return; // Не переходим к следующей странице
+            }
+        }
+
         
         stopCurrentAnimation();
         removeFullscreenClickListener();
@@ -243,6 +290,22 @@ function createFullscreenClickListenerForNext(nextSceneId) {
     
     fullscreenClickListener = () => {
         if (gameState.waitingForChoice) return;
+
+        // Проверяем, идет ли сейчас анимация
+        if (currentAnimation) {
+            // ПРОПУСКАЕМ АНИМАЦИЮ
+            const currentMessage = document.querySelector('.message:last-child');
+            if (currentMessage && currentMessage.dataset.fullText) {
+                const fullText = currentMessage.dataset.fullText;
+                const callback = currentMessage._callback;
+                
+                skipAnimation(currentMessage, fullText, () => {
+                    // После пропуска показываем, что можно нажать для продолжения
+                    if (callback) callback();
+                });
+                return;
+            }
+        }
         
         stopCurrentAnimation();
         removeFullscreenClickListener();
