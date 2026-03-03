@@ -337,6 +337,7 @@ const scenes = {
                 effect: () => {
                     clearAllMessages();
                 }
+                
             },
             { 
                 text: "Давай", 
