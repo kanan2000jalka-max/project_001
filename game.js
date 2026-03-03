@@ -80,7 +80,7 @@ function addMessage(text, sender = "game") {
 // ========================
 // ПОБУКВЕННАЯ ПЕЧАТЬ СООБЩЕНИЯ
 // ========================
-function typeMessage(text, messageElement, speed = 30, callback = null) {
+function typeMessage(text, messageElement, speed = 10, callback = null) {
     stopCurrentAnimation();
     
     let index = 0;
@@ -344,11 +344,7 @@ const scenes = {
             { 
                 text: "Что за эксперимент?", 
                 nextScene: "non",
-                style: "mysterious",
-                effect: () => {
-                    clearAllMessages();
-                }
-                
+                style: "mysterious"
             },
             { 
                 text: "Давай", 
@@ -367,6 +363,9 @@ const scenes = {
         type: "choice",
         background: "url('images/11.png')",
         text: "Эта страница пока что еще не готова. Прошу вас вернуться в самое начало)",
+        effect: () => {
+            clearAllMessages();
+        },
         choices: [
             { 
                 text: "В начало", 
