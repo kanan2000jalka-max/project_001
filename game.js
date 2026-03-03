@@ -306,6 +306,17 @@ function showFirstScene() {
 }
 
 // ========================
+// КОМАНДЫ ДЛЯ ОЧИСТКИ ЭКРАНА
+// ========================
+
+function clearAllMessages() {
+    const wrapper = document.querySelector('.messages-wrapper');
+    if (wrapper) {
+        wrapper.innerHTML = '';  // Удаляет ВСЕ сообщения
+    }
+}
+
+// ========================
 // СЦЕНЫ
 // ========================
 const scenes = {
@@ -333,7 +344,7 @@ const scenes = {
             { 
                 text: "Что за эксперимент?", 
                 nextScene: "non",
-                style: "mysterious"
+                style: "mysterious",
                 effect: () => {
                     clearAllMessages();
                 }
