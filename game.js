@@ -464,7 +464,7 @@ const scenes = {
         choices: [
             { 
                 text: "Интересно", 
-                nextScene: "prlg_0.2",
+                nextScene: "prlg_0.2m",
                 style: "mysterious"
             }
         ]
