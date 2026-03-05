@@ -428,7 +428,7 @@ const scenes = {
                 text: "Что за эксперимент?", 
                 nextScene: "prlg_0.1.1m",
                 style: "mysterious"
-                }
+                
             },
             { 
                 text: "Давай", 
