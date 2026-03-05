@@ -453,7 +453,7 @@ const scenes = {
             "Попытка заглянуть за ширму!"
         ],
         onComplete: {
-            nextScene: "prlg_0.1.1.2"
+            nextScene: "prlg_0.1.1c"
         }
     },
     
