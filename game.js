@@ -443,7 +443,7 @@ const scenes = {
                     clearAllMessages();
                 }
             }
-        ]
+        ],
     },
     
     "prlg_0.1.1m": {
