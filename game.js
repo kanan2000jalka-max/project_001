@@ -664,6 +664,11 @@ const scenes = {
                 nextScene: "prlg_0.2.3.4m",
                 style: "mysterious"
             },
+            { 
+                text: "Я все понял", 
+                nextScene: "prlg_0.2.4",
+                style: "mysterious"
+            },
         ]
     },
 
